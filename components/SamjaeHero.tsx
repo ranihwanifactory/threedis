@@ -15,17 +15,17 @@ export const SamjaeHero: React.FC = () => {
       </div>
 
       <div className="z-10 text-center">
-        <div className="mb-2 inline-block px-3 py-1 rounded-full bg-stone-900 text-stone-50 text-[10px] tracking-widest font-bold">
-          2025 EUL-SA YEAR
+        <div className="mb-2 inline-block px-3 py-1 rounded-full bg-red-700 text-white text-[10px] tracking-widest font-bold">
+          2026 BYEONG-OH YEAR
         </div>
         <h1 className="text-4xl font-traditional font-bold text-stone-800 tracking-tight mb-2">
           운세똑똑
         </h1>
-        <p className="text-stone-500 text-sm font-light">삼재 확인과 따뜻한 위로</p>
+        <p className="text-stone-500 text-sm font-light">병오년 삼재 확인과 따뜻한 위로</p>
       </div>
 
       <div className="absolute -bottom-4 float-animation">
-         <span className="text-6xl">🐍</span>
+         <span className="text-6xl">🐴</span>
       </div>
     </div>
   );

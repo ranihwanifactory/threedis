@@ -7,7 +7,7 @@ import { SamjaeSummary } from './components/SamjaeSummary';
 import { SamjaeResult, SamjaeType } from './types';
 import { getSamjaeStatus, getZodiacFromYear, KOREAN_YEAR_NAMES } from './constants';
 
-const CURRENT_YEAR = 2025;
+const CURRENT_YEAR = 2026;
 
 const App: React.FC = () => {
   const [result, setResult] = useState<SamjaeResult | null>(null);
