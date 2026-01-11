@@ -4,6 +4,7 @@ import { SamjaeHero } from './components/SamjaeHero';
 import { SamjaeCheck } from './components/SamjaeCheck';
 import { SamjaeAdvice } from './components/SamjaeAdvice';
 import { SamjaeSummary } from './components/SamjaeSummary';
+import { ShareButton } from './components/ShareButton';
 import { SamjaeResult, SamjaeType } from './types';
 import { getSamjaeStatus, getZodiacFromYear, KOREAN_YEAR_NAMES } from './constants';
 
@@ -11,14 +12,34 @@ const CURRENT_YEAR = 2026;
 
 const App: React.FC = () => {
   const [result, setResult] = useState<SamjaeResult | null>(null);
-  const [isPWA, setIsPWA] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
-    // Check if app is running as PWA
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    });
+
+    window.addEventListener('appinstalled', () => {
+      setIsInstalled(true);
+      setDeferredPrompt(null);
+    });
+    
     if (window.matchMedia('(display-mode: standalone)').matches) {
-      setIsPWA(true);
+      setIsInstalled(true);
     }
   }, []);
+
+  const handleInstall = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setDeferredPrompt(null);
+      }
+    }
+  };
 
   const handleCheck = (year: number) => {
     const status = getSamjaeStatus(year, CURRENT_YEAR);
@@ -42,6 +63,20 @@ const App: React.FC = () => {
         <SamjaeHero />
 
         <main className="flex-grow px-6 py-8">
+          <div className="flex justify-between items-center mb-6">
+            <ShareButton 
+              text={result ? `${result.birthYear}년생 ${result.zodiac}띠, 2026년 운세똑똑 결과 확인!` : undefined}
+            />
+            {deferredPrompt && !isInstalled && (
+              <button 
+                onClick={handleInstall}
+                className="text-xs font-bold text-red-700 underline underline-offset-4"
+              >
+                앱 설치하기
+              </button>
+            )}
+          </div>
+
           {!result ? (
             <>
               <SamjaeCheck onCheck={handleCheck} />
@@ -98,7 +133,7 @@ const App: React.FC = () => {
             삼재는 전통적인 풍습일 뿐, 당신의 운명은 스스로의 노력으로 만들어가는 것입니다. <br/>
             언제나 당신의 하루를 응원합니다.
           </p>
-          {!isPWA && (
+          {!isInstalled && (
             <p className="mt-4 text-[10px] text-stone-300">
               * 홈 화면에 추가하면 앱처럼 사용할 수 있어요!
             </p>

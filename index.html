@@ -4,7 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>운세똑똑 - 2025 삼재 알림</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>운세똑똑 | 2026년 병오년 삼재 계산기</title>
+    <meta name="description" content="2026년 병오년(붉은 말의 해) 나의 삼재 여부를 확인하세요. 돼지띠, 토끼띠, 양띠를 위한 따뜻한 조언과 무료 삼재 계산기.">
+    <meta name="keywords" content="삼재, 2026년 삼재, 병오년, 삼재띠, 눌삼재, 들삼재, 날삼재, 무료운세, 사주, 운세똑똑">
+    <meta name="author" content="운세똑똑">
+    <link rel="canonical" href="https://samjae-2026.web.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://samjae-2026.web.app/">
+    <meta property="og:title" content="운세똑똑 | 2026년 병오년 삼재 계산기">
+    <meta property="og:description" content="나는 올해 삼재일까? 2026년 병오년 삼재 확인하고 AI가 들려주는 따뜻한 조언을 받아보세요.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1505673539012-ee7507e84593?auto=format&fit=crop&w=1200&h=630&q=80">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://samjae-2026.web.app/">
+    <meta property="twitter:title" content="운세똑똑 | 2026년 병오년 삼재 계산기">
+    <meta property="twitter:description" content="2026년 병오년 삼재 확인하고 AI가 들려주는 따뜻한 조언을 받아보세요.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1505673539012-ee7507e84593?auto=format&fit=crop&w=1200&h=630&q=80">
+
+    <!-- PWA -->
+    <link rel="manifest" href="metadata.json">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="운세똑똑">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +68,15 @@
 </head>
 <body class="bg-stone-50 text-stone-900">
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch(err => {
+            console.log('SW registration failed: ', err);
+          });
+        });
+      }
+    </script>
 <script type="module" src="/index.tsx"></script>
 </body>
 </html>
